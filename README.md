@@ -3,76 +3,85 @@
 DATE :
 
 AIM :
-
-To write a python program to perform client server model.
+To implement socket programming date and time display from client to server using TCPSockets.
 
 ALGORITHM :
 
-    Start the program.
-    Get the frame size from the user
-    To create the frame based on the user request.
-    To send frames to server from the client side.
-    If your frames reach the server it will send ACK signal to client otherwise it will sendNACK signal to client.
-    Stop the program
+Server:
 
-CLIENT PROGRAM:
+    1.Create a server socket and bind it to port.
+    2.Listen for new connection and when a connection arrives, accept it.
+    3.Send server‟s date and time to the client.
+    4.Read client‟s IP address sent by the client.
+    5.Display the client details.
+    6.Repeat steps 2-5 until the server is terminated.
+    7.Close all streams.
+    8.Close the server socket.
+    9.Stop.
 
-Developed By : Sindhuja P
+Client:
 
-Reg No : 212222220047
+    1.Create a client socket and connect it to the server‟s port number.
+    2.Retrieve its own IP address using built-in function.
+    3.Send its address to the server.
+    4.Display the date & time sent by the server.
+    5.Close the input and output streams.
+    6.Close the client socket.
+    7.Stop.
+
+PROGRAM :
+
+CLIENT :
 
 import socket
 
+from datetime import datetime
+
 s=socket.socket()
 
-s.bind(('localhost',8080))
+s.bind(('localhost',8000))
 
 s.listen(5)
 
 c,addr=s.accept()
 
-while True:
+print("Client Address : ",addr)
 
-i=input("ENter a data:")
+now = datetime.now()
 
-c.send(i.encode())
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
 
 ack=c.recv(1024).decode()
 
 if ack:
-
 	print(ack)
-
-	continue
-
-else:
-
 	c.close()
-
-	break
-
-SERVER PROGRAME:
+    
+Server:
 
 import socket
 
 s=socket.socket()
 
-s.connect(('localhost',8080))
+s.connect(('localhost',8000))
 
-while True:
+print(s.getsockname())
 
 print(s.recv(1024).decode())
 
-s.send("Recieved".encode())
+s.send("acknowledgement recived from the server".encode())
+
 
 CLIENT OUTPUT:
 
-![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/c616e05d-40d9-4c01-ae5a-92f1d0a3f0b8)
+![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/d332c2be-307f-4ab8-bcfa-5b81f8c247c5)
+
 
 
 SERVER OUTPUT:
 
-![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/02098498-387e-4da0-8e22-846128cafb76)
+![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/9372c445-698e-47f5-83c4-375bbc641958)
+
 
 
 RESULT:
