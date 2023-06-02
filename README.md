@@ -2,6 +2,10 @@
 
 DATE :
 
+Developed by : Sindhuja P
+
+Register Number : 212222220047
+
 AIM :
 
 To implement socket programming date and time display from client to server using TCPSockets.
@@ -57,9 +61,9 @@ CLIENT :
     
     if ack:
     
-    print(ack)
+        print(ack)
     
-    c.close()
+        c.close()
     
 Server:
 
