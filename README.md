@@ -32,59 +32,64 @@ Client:
 
 PROGRAM :
 
+
 CLIENT :
 
-import socket
-
-from datetime import datetime
-
-s=socket.socket()
-
-s.bind(('localhost',8000))
-
-s.listen(5)
-
-c,addr=s.accept()
-
-print("Client Address : ",addr)
-
-now = datetime.now()
-
-c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
-
-ack=c.recv(1024).decode()
-
-if ack:
-	print(ack)
-	c.close()
+    import socket
+    
+    from datetime import datetime
+    
+    s=socket.socket()
+    
+    s.bind(('localhost',8000))
+    
+    s.listen(5)
+    
+    c,addr=s.accept()
+    
+    print("Client Address : ",addr)
+    
+    now = datetime.now()
+    
+    c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+    
+    ack=c.recv(1024).decode()
+    
+    if ack:
+    
+    print(ack)
+    
+    c.close()
     
 Server:
 
-import socket
+	import socket
+	
+	s=socket.socket()
+	
+	s.connect(('localhost',8000))
+	
+	print(s.getsockname())
+	
+	print(s.recv(1024).decode())
+	
+	s.send("acknowledgement recived from the server".encode())
 
-s=socket.socket()
-
-s.connect(('localhost',8000))
-
-print(s.getsockname())
-
-print(s.recv(1024).decode())
-
-s.send("acknowledgement recived from the server".encode())
 
 
 CLIENT OUTPUT:
 
-![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/d332c2be-307f-4ab8-bcfa-5b81f8c247c5)
+![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/23a672cd-ac43-4141-94f9-8d5bcdd3ba02)
+
 
 
 
 SERVER OUTPUT:
 
-![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/9372c445-698e-47f5-83c4-375bbc641958)
+![image](https://github.com/Sindhuja9585/19CS406-EX-1/assets/122860624/76c7fdb9-2a29-4289-a199-e4d9dab8f032)
 
 
 
 RESULT:
 
-Thus, python program to perform stop and wait protocol was successfully executed.
+Thus, the program to implement socket programming date and time display from client to server using TCP Sockets was successfully executed.
